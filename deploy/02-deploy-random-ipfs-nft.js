@@ -29,7 +29,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
   const chainId = network.config.chainId;
   let tokenUris;
 
-  //get ipfs hases for images
+  //get ipfs hashes for images
   if (process.env.UPLOAD_TO_PINATA == "true") {
     tokenUris = await handleTokenUris();
   }
