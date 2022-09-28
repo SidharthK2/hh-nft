@@ -4,17 +4,26 @@ const {
   networkConfig,
 } = require("../helper-hardhat-config");
 const { verify } = require("../utils/verify");
+const { storeImages } = require("../utils/uploadToPinata");
+
+const imagesLocation = "./images/randomNft";
 
 module.exports = async ({ getNamedAccounts, deployments }) => {
   const { deploy, log } = deployments;
   const { deployer } = await getNamedAccounts();
   const chainId = network.config.chainId;
+  let tokenUris;
+
+  //get ipfs hases for images
+  if (process.env.UPLOAD_TO_PINATA == "true") {
+    tokenUris = await handleTokenUris();
+  }
 
   let vrfCoordinatorV2Address, subscriptionId;
 
   if (developmentChains.includes(network.name)) {
     const vrfCoordinatorV2Mock = await ethers.getContract(
-      "vrfCoordinatorV2Mock"
+      "VRFCoordinatorV2Mock"
     );
     vrfCoordinatorV2Address = vrfCoordinatorV2Mock.address;
     const tx = await vrfCoordinatorV2Mock.createSubscription();
@@ -25,12 +34,21 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     subscriptionId = networkConfig[chainId].subscriptionId;
   }
   log("----------------------");
-  const args = [
-    vrfCoordinatorV2Address,
-    subscriptionId,
-    networkConfig[chainId].gasLane,
-    networkConfig[chainId].callbackGasLimit,
-    //toekn uri,
-    networkConfig[chainId].mintFee,
-  ];
+  await storeImages(imagesLocation);
+  //   const args = [
+  //     vrfCoordinatorV2Address,
+  //     subscriptionId,
+  //     networkConfig[chainId].gasLane,
+  //     networkConfig[chainId].callbackGasLimit,
+  //     //toekn uri,
+  //     networkConfig[chainId].mintFee,
+  //   ];
 };
+
+async function handleTokenUris() {
+  tokenUris = [];
+
+  return tokenUris;
+}
+
+module.exports.tags = ["all", "randomipfs", "main"];
