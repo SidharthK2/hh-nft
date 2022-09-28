@@ -24,4 +24,13 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     vrfCoordinatorV2Address = networkConfig[chainId].vrfCoordinatorV2;
     subscriptionId = networkConfig[chainId].subscriptionId;
   }
+  log("----------------------");
+  const args = [
+    vrfCoordinatorV2Address,
+    subscriptionId,
+    networkConfig[chainId].gasLane,
+    networkConfig[chainId].callbackGasLimit,
+    //toekn uri,
+    networkConfig[chainId].mintFee,
+  ];
 };
