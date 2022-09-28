@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
 error RandomIpfsNft__RangeOutOfBounds();
 
-contract RandomIpfsNft is VRFConsumerBaseV2, ERC721 {
+contract RandomIpfsNft is VRFConsumerBaseV2, ERC721URIStorage {
     //type declaration
     enum Breed {
         PUG,
@@ -65,7 +65,7 @@ contract RandomIpfsNft is VRFConsumerBaseV2, ERC721 {
         uint256 moddedRng = randomWords[0] % MAX_CHANCE_VALUE;
         Breed dogBreed = getBreedFromModdedRng(moddedRng);
         _safeMint(dogOwner, newTokenId);
-        _setTokenURI(newTokenId,)
+        _setTokenURI(newTokenId, s_dogTokenUris[uint256(dogBreed)]);
     }
 
     function getBreedFromModdedRng(uint256 moddedRng)
