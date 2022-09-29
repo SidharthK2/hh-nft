@@ -62,7 +62,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
 
 async function handleTokenUris() {
   tokenUris = [];
-  const { reponses: imageUploadResponses, files } = await storeImages(
+  const { responses: imageUploadResponses, files } = await storeImages(
     imagesLocation
   );
   for (index in imageUploadResponses) {
