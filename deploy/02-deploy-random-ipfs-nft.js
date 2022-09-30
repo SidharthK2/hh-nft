@@ -52,22 +52,22 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     subscriptionId = networkConfig[chainId].subscriptionId;
   }
   log("----------------------");
-  
+
   const args = [
-       vrfCoordinatorV2Address,
-       subscriptionId,
-       networkConfig[chainId].gasLane,
-       networkConfig[chainId].callbackGasLimit,
-       tokenUris,
-       networkConfig[chainId].mintFee,
-     ];
-  
+    vrfCoordinatorV2Address,
+    subscriptionId,
+    networkConfig[chainId].gasLane,
+    networkConfig[chainId].callbackGasLimit,
+    tokenUris,
+    networkConfig[chainId].mintFee,
+  ];
+
   const randomIpfsNft = await deploy("RandomIpfsNft", {
-        from: deployer,
-        args: args,
-        log: true,
-        waitConfirmations: network.config.blockConfirmations || 1,
-    })
+    from: deployer,
+    args: args,
+    log: true,
+    waitConfirmations: network.config.blockConfirmations || 1,
+  });
 };
 
 async function handleTokenUris() {

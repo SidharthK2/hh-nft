@@ -1,4 +1,5 @@
 const { assert, expect } = require("chai");
+const { randomBytes } = require("ethers/lib/utils");
 const { getNamedAccounts, deployments, ethers, network } = require("hardhat");
 const {
   developmentChains,
@@ -45,6 +46,22 @@ const { deploy, log } = deployments;
         });
       });
       describe("Fulfill random words", () => {
-        it("");
+        it("it mints nft and sets uri", async () => {
+          const mintFee = await randomIpfsNft.getMintFee();
+          const initialTokencounter = await randomIpfsNft.getTokenCounter();
+          const tx = await randomIpfsNft.requestNft({ value: mintFee });
+          const txRecepit = await tx.wait(1);
+          await vrfCoordinatorV2Mock.fulfillRandomWords(
+            txRecepit.events[1].args.requestId,
+            randomIpfsNft.address
+          );
+          const tokenUri = await randomIpfsNft.tokenURI(initialTokencounter);
+          const endTokenCounter = await randomIpfsNft.getTokenCounter();
+          assert.equal(
+            endTokenCounter.toString(),
+            (initialTokencounter.toNumber() + 1).toString()
+          );
+          assert.equal(tokenUri.toString().includes("ipfs://"), true);
+        });
       });
     });
