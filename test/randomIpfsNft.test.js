@@ -19,7 +19,7 @@ const { deploy, log } = deployments;
           deployer
         );
       });
-      describe("requestNft", () => {
+      describe("request Nft", () => {
         it("fails if payment isn't sent with the request", async () => {
           await expect(
             randomIpfsNft.requestNft()
@@ -43,5 +43,8 @@ const { deploy, log } = deployments;
             randomIpfsNft.requestNft({ value: mintFee.toString() })
           ).to.emit(randomIpfsNft, "NftRequested");
         });
+      });
+      describe("Fulfill random words", () => {
+        it("");
       });
     });
