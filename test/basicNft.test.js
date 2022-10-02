@@ -8,7 +8,7 @@ const { deploy, log } = deployments;
 
 !developmentChains.includes(network.name)
   ? describe.skip
-  : describe("basic Nft", function () {
+  : describe("basic nft", function () {
       let basicNft;
       beforeEach(async () => {
         let { deployer } = await getNamedAccounts();

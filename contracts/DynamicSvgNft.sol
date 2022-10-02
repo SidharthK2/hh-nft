@@ -59,7 +59,6 @@ contract DynamicSvgNft is ERC721 {
         returns (string memory)
     {
         require(_exists(tokenId), "URI query for nonexistant token");
-        // string memory imageURI = "hi";
 
         (, int256 price, , , ) = i_priceFeed.latestRoundData();
         string memory imageURI = i_lowImageUri;
@@ -67,22 +66,27 @@ contract DynamicSvgNft is ERC721 {
         if (price >= s_tokenIdToHighValue[tokenId]) {
             imageURI = i_highImageUri;
         }
-        string(
-            abi.encodePacked(
-                _baseURI(),
-                Base64.encode(
-                    bytes(
-                        abi.encodePacked(
-                            '{"name":"',
-                            name(),
-                            '", "description":"An NFT that changes based on the chainlink feed", ',
-                            '"attribute": [{"trait_type": "coolness", "value": 100}], "image":"',
-                            imageURI,
-                            '"}'
+        return
+            string(
+                abi.encodePacked(
+                    _baseURI(),
+                    Base64.encode(
+                        bytes(
+                            abi.encodePacked(
+                                '{"name":"',
+                                name(),
+                                '", "description":"An NFT that changes based on the chainlink feed", ',
+                                '"attribute": [{"trait_type": "coolness", "value": 100}], "image":"',
+                                imageURI,
+                                '"}'
+                            )
                         )
                     )
                 )
-            )
-        );
+            );
+    }
+
+    function getTokenCounter() public view returns (uint256) {
+        return s_tokenCounter;
     }
 }

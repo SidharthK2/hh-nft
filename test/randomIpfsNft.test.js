@@ -9,7 +9,7 @@ const { deploy, log } = deployments;
 
 !developmentChains.includes(network.name)
   ? describe.skip
-  : describe("random Ipfs Nft", () => {
+  : describe("random ipfs nft", () => {
       let randomIpfsNft, vrfCoordinatorV2Mock;
       beforeEach(async () => {
         let { deployer } = await getNamedAccounts();
