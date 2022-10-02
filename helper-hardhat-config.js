@@ -18,6 +18,7 @@ const networkConfig = {
     callbackGasLimit: "500000", // 500,000 gas
     mintFee: "10000000000000000", // 0.01 ETH
     subscriptionId: "2846", // add your ID here!
+    ethUsdPriceFeed: "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419",
   },
 };
 
