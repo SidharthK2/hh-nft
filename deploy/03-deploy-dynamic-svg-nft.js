@@ -5,6 +5,7 @@ const {
 } = require("../helper-hardhat-config");
 const { verify } = require("../utils/verify");
 const fs = require("fs");
+
 module.exports = async ({ getNamedAccounts, deployments }) => {
   const { deploy, log } = deployments;
   const { deployer } = await getNamedAccounts();
@@ -19,10 +20,10 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     ethUsdPriceFeedAddress = networkConfig[chainId].ethUsdPrice;
   }
 
-  const lowSvg = await fs.readFileSync("./images/dynamicNft/frown.svg", {
+  const lowSvg = fs.readFileSync("./images/dynamicNft/frown.svg", {
     encoding: "utf-8",
   });
-  const highSvg = await fs.readFileSync("./images/dynamicNft/happy.svg", {
+  const highSvg = fs.readFileSync("./images/dynamicNft/happy.svg", {
     encoding: "utf-8",
   });
 
