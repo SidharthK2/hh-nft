@@ -64,7 +64,7 @@ module.exports = {
   etherscan: {
     // yarn hardhat verify --network <NETWORK> <CONTRACT_ADDRESS> <CONSTRUCTOR_PARAMETERS>
     apiKey: {
-      rinkeby: ETHERSCAN_API_KEY,
+      apiKey: ETHERSCAN_API_KEY,
     },
   },
 };
