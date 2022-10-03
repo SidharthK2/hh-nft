@@ -17,7 +17,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     const EthUsdAggregator = await ethers.getContract("MockV3Aggregator");
     ethUsdPriceFeedAddress = EthUsdAggregator.address;
   } else {
-    ethUsdPriceFeedAddress = networkConfig[chainId].ethUsdPrice;
+    ethUsdPriceFeedAddress = networkConfig[chainId].ethUsdPriceFeed;
   }
 
   const lowSvg = fs.readFileSync("./images/dynamicNft/frown.svg", {
